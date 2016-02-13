@@ -102,5 +102,3 @@ def get_rhyme(markov, lines):
     chain = defaultdict(list)
     chain.update(json.load(file))
     return rhymify(chain, lines)
-
-print get_rhyme("../models/top100rapsfixed.json", 10)
