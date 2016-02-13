@@ -2,6 +2,8 @@
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg "Build")
 ![License](https://img.shields.io/badge/license-MIT-blue.svg "License")
 
+![Rappers](http://ppcorn.com/us/wp-content/uploads/sites/14/2015/04/The-Top-10-Greatest-Rappers-of-All-Time-PPCORN.jpg "Rappers")
+
 Alexa can spit bars now. Check it out! Developed at TreeHacks 2016!
 
 ## Credits
