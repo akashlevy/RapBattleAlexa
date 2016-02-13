@@ -1,7 +1,7 @@
 # RapBattleAlexa
 ![License](https://img.shields.io/badge/license-MIT-blue.svg "License")
 
-Alexa can spit bars now. Check it out!
+Alexa can spit bars now. Check it out! Developed at TreeHacks 2016!
 
 ## Credits
 - [ask-alexa-pykit](https://github.com/anjishnu/ask-alexa-pykit)
