@@ -1,4 +1,5 @@
 # RapBattleAlexa
+![Build](https://img.shields.io/travis/USER/REPO.svg "Build")
 ![License](https://img.shields.io/badge/license-MIT-blue.svg "License")
 
 Alexa can spit bars now. Check it out! Developed at TreeHacks 2016!
