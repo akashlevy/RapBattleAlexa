@@ -1,15 +1,15 @@
+import json
 import random
-
 from collections import defaultdict
 from sys import argv
 
 DELIM = ' '
 
-def build_model(file):
-  markov_file = open(file, 'r')
+# Builds the Markov model
+def build_model(infile):
   chain = defaultdict(list)
-  lines = markov_file.readlines()
-  markov_file.close()
+  with open(infile, 'r') as markov_file:
+    lines = markov_file.readlines()
   for line in lines:
     line = line.rstrip('\n').lower().strip()
     words = line.split(' ')
@@ -22,17 +22,13 @@ def build_model(file):
     chain[DELIM].append(words[0])
   return chain
 
-def write_model(file):
-  chain = build_model(file)
-  f = open('models.py', 'w')
-  string = 'markov_model = {'
-  for state in chain:
-    string += repr(state) + ':' + repr(chain[state]) + ','
-  string += '}'
-  f.write(string)
-  f.close()
-  return 'done'
+# Writes the Markov model to a json file
+def write_model(infile, markov):
+  chain = build_model(infile)
+  with open(markov, 'w') as outfile:
+    json.dump(chain, outfile)
 
+# Generates a line of rap
 def generate_line(model):
   line = []
   current = DELIM
@@ -43,12 +39,14 @@ def generate_line(model):
   verse = ' '.join(line).strip()
   return verse
 
+# Gets a good verse for a rap
 def get_good_verse(model):
   verse = generate_line(model)
   while len(verse.split(' ')) != 8:
     verse = generate_line(model)
   return verse
 
+# Chooses a rhyme
 def choose_rhymes(first_word, second_word, r_dict_a, r_dict_b):
   # No rhymes exist for either words
   if len(r_dict_a) < 2 and len(r_dict_b) < 2:
@@ -67,6 +65,7 @@ def choose_rhymes(first_word, second_word, r_dict_a, r_dict_b):
 
   return first_word, random.choice(r_dict_a)
 
+# Makes a rhyming scheme
 def rhymify(model, lines):
   sonnet = []
   for i in range(int(lines)):
@@ -91,14 +90,17 @@ def rhymify(model, lines):
 
     fixed.append(' '.join(first))
     fixed.append(' '.join(second))
-    index+=2
+    index += 2
 
   final_rhyme = ''
   for line in fixed:
     final_rhyme += line + '. \n'
-  return final_rhyme
+  return final_rhyme.strip()
 
-def get_rhyme(lines):
-  from models import markov_model
-  return rhymify(markov_model, lines)
+def get_rhyme(markov, lines):
+  with open(markov) as file:
+    chain = defaultdict(list)
+    chain.update(json.load(file))
+    return rhymify(chain, lines)
 
+print get_rhyme("../models/top100rapsfixed.json", 10)
