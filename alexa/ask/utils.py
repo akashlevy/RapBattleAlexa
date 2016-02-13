@@ -3,7 +3,6 @@ from collections import OrderedDict, defaultdict
 import json
 import pkgutil
 import inspect
-from config.config import INTENT_SCHEMA, NON_INTENT_REQUESTS
 
 
 RAW_RESPONSE = """
@@ -12,7 +11,7 @@ RAW_RESPONSE = """
     "response": {
         "outputSpeech": {
             "type": "PlainText",
-            "text": "Welcome to your recipes. I am ready to serve."
+            "text": "Welcome to your raps. I am ready to serve."
                 },
         "shouldEndSession": False
     }
@@ -33,26 +32,21 @@ class VoiceHandler(object):
         return function
 
 
-def initialize_handlers(voice_handlers):
+def initialize_handlers(voice_handlers, INTENT_SCHEMA, NON_INTENT_REQUESTS):
     """
     Automatically populate function handlers from the handlers in the voice_handlers module
     """
-
     # If no handler is specified, backoff to default handler
-
     init_default_handler = lambda : voice_handlers.default_handler
     all_handlers_map = defaultdict(init_default_handler)
     intent_handlers_map = defaultdict(init_default_handler)
-
     # Load intent schema to verify that handlers are mapped to valid intents
-    all_intents = {intent["intent"] : {
-        slot["name"] : slot["type"] for slot in intent['slots'] }
+    all_intents = {intent["intent"] : { slot["name"] : slot["type"] for slot in intent['slots'] }
                    for intent in INTENT_SCHEMA['intents'] }
-
-    # Loaded functions in the handlers module
+    #Loaded functions in the handlers module
     member_functions = inspect.getmembers(voice_handlers, inspect.isfunction)
     for (name, function) in member_functions:
-        if hasattr(function, 'voice_handler'): # Function has been decorated as a voice_handler
+        if hasattr(function, 'voice_handler'): #Function has been decorated as a voice_handler
             if 'request_type' in function.voice_handler:
                 if function.voice_handler['request_type'] in NON_INTENT_REQUESTS:
                     # Function is a valid request voice handler
@@ -61,7 +55,6 @@ def initialize_handlers(voice_handlers):
                 if function.voice_handler['intent'] in all_intents:
                     # Function is a valid intent voice handler
                     intent_handlers_map[function.voice_handler['intent']] = function
-
     all_handlers_map['IntentRequest'] = intent_handlers_map
     return all_handlers_map
 

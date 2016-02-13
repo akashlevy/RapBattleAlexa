@@ -1,0 +1,21 @@
+{
+    "intents": [
+        {
+            "slots": [],
+            "intent": "Start"
+        },
+        {
+            "slots": [
+                {
+                    "name": "Rapper",
+                    "type": "AMAZON.LITERAL"
+                }
+            ],
+            "intent": "StartLike"
+        },
+        {
+            "slots": [],
+            "intent": "DropBeat"
+        }
+    ]
+}

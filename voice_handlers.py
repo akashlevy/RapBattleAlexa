@@ -4,7 +4,7 @@ from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
 In this file we specify default event handlers which are then populated into the handler map using metaprogramming
 Copyright Anjishnu Kumar 2015
 
-Each VoiceHandler function receives a Request object as input and outputs a Response object 
+Each VoiceHandler function receives a ResponseBuilder object as input and outputs a Response object
 A response object is defined as the output of ResponseBuilder.create_response()
 """
 
@@ -16,7 +16,7 @@ def default_handler(request):
 @VoiceHandler(request_type="LaunchRequest")
 def launch_request_handler(request):
     """
-    Annoatate functions with @VoiceHandler so that they can be automatically mapped 
+    Annoatate functions with @VoiceHandler so that they can be automatically mapped
     to request types.
     Use the 'request_type' field to map them to non-intent requests
     """
@@ -28,31 +28,42 @@ def session_ended_request_handler(request):
     return r.create_response(message="Goodbye!")
 
 
-@VoiceHandler(intent='GetRecipeIntent')
-def get_recipe_intent_handler(request):
+@VoiceHandler(intent='StartLike')
+def get_rapper_intent_handler(request):
     """
     Use the 'intent' field in the VoiceHandler to map to the respective intent.
-    You can insert arbitrary business logic code here    
+    You can insert arbitrary business logic code here
     """
 
     # Get variables like userId, slots, intent name etc from the 'Request' object
-    ingredient = request.get_slot_value("Ingredient") 
-    ingredient = ingredient if ingredient else ""
+    rapper = request.get_slot_value("Rapper")
+    rapper = rapper if rapper else ""
+
+    intros = {'eminem':'Yo I\'m the real shady the real slim shady, here I go.', 'drake':'Jump man jump man jump man what.', 'yeezus':'I\'m gonna let you finish. but Beyonce, is the best singer, of all time'}
+
+    intro = intros[rapper] if intros[rapper] else ""
 
     #Use ResponseBuilder object to build responses and UI cards
-    card = r.create_card(title="GetRecipeIntent activated",
+    card = r.create_card(title="Rapping",
                          subtitle=None,
-                         content="asked alexa to find a recipe using {}"
-                         .format(ingredient))
-    
-    return r.create_response(message="Finding a recipe with the ingredient {}".format(ingredient),
+                         content=("Yo my name is {}. ".format(rapper)) + intro + " Alexa, drop me a fat beat.")
+
+
+    return r.create_response(message=("Yo my name is {}. ".format(rapper) + intro + " Alexa, drop me a fat beat."),
                              end_session=False,
                              card_obj=card)
 
 
-@VoiceHandler(intent="NextRecipeIntent")
+@VoiceHandler(intent="Start")
 def call_back_intent_handler(request):
     """
     You can insert arbitrary business logic code here
     """
-    return r.create_response(message="Getting Next Recipe ... 123")
+    return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat.")
+
+@VoiceHandler(intent="DropBeat")
+def drop_beat_intent_handler(request):
+    """
+    You can insert arbitrary business logic code here
+    """
+    return r.create_response(message="boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and ")
