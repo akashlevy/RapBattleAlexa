@@ -97,8 +97,11 @@ def rhymify(model, lines):
     final_rhyme += line + ', '
   return final_rhyme
 
-def get_rhyme(markov, lines):
+def get_rhyme(chain, lines):
+  return rhymify(chain, lines)
+
+def get_model(markov)
   with open(markov) as file:
     chain = defaultdict(list)
     chain.update(json.load(file))
-    return rhymify(chain, lines)
+  return chain

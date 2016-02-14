@@ -1,5 +1,9 @@
 from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
-from markov.markov import get_rhyme
+from markov.markov import get_rhyme, get_model
+
+chains = {}
+for file in os.listdir("m"):
+    chains[file] = get_model("models/%s" % file[:-5])
 
 """
 In this file we specify default event handlers which are then populated into the handler map using metaprogramming
@@ -40,12 +44,15 @@ def get_rapper_intent_handler(request):
     rapper = request.get_slot_value("Rapper")
     rapper = rapper if rapper else ""
 
-    intros = {'eminem':'Yo I\'m the real shady the real slim shady, here I go.', 'drake':'Jump man jump man jump man what.', 'yeezus':'I\'m gonna let you finish. but Beyonce, is the best singer, of all time'}
+    with open("models/intros.json") as file:
+        intros = json.load(file)
 
-    intro = intros[rapper] if intros[rapper] else ""
+    try:
+        intro = intros[rapper]
+    except KeyError:
+        intro = ""
 
-    rap = get_rhyme("models/top100raps.json", 8)
-    # rap = "hi"
+    rap = get_rhyme(chains[rapper], 8)
 
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
@@ -63,8 +70,7 @@ def call_back_intent_handler(request):
     """
     You can insert arbitrary business logic code here
     """
-    rap = get_rhyme("models/top100raps.json", 8)
-    # rap = "hi"
+    rap = get_rhyme(chains["top100raps"], 8)
     return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
 
 @VoiceHandler(intent="DropBeat")
