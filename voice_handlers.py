@@ -2,10 +2,16 @@ from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
 from markov.markov import get_rhyme, get_model
 import json
 import os
+import tinys3
 
 chains = {}
 for file in os.listdir("models"):
     chains[file[:-5]] = get_model("models/%s" % file)
+
+with open("KEYS") as keyfile:
+    S3_ACCESS_KEY = f.readline().strip()
+    S3_SECRET_KEY = f.readline().strip()
+    conn = tinys3.Connection(S3_ACCESS_KEY, S3_SECRET_KEY, tls=True)
 
 """
 In this file we specify default event handlers which are then populated into the handler map using metaprogramming
@@ -59,7 +65,9 @@ def get_rapper_intent_handler(request):
     except KeyError:
         return r.create_response(message="I heard, %s, but I don't know that rapper." % rapper, end_session=False)
 
-    #Use ResponseBuilder object to build responses and UI cards
+    upload_rap(rap)
+
+    # Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
                          subtitle=None,
                          content=("<speak>Yo my name is {}. ".format(rapper) + intro + " " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'))
@@ -78,4 +86,15 @@ def call_back_intent_handler(request):
     """
 
     rap = get_rhyme(chains["toponehundredraps"], 8)
+    upload_rap(rap)
     return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. "  + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
+
+
+def upload_rap(rap):
+    """
+    Saves rap to json and uploads it, so it can be read
+    """
+    with open("rap", "w") as file:
+        file.write(rap)
+    with open("rap", "rb") as file:
+        conn.upload('rap', file, 'rapbattlealexa', public=True)

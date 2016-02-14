@@ -64,11 +64,19 @@ target/
 # Zip files
 *.zip
 
+# Private files/temps
+KEYS
+rap
+
 # Dependencies for AWS
 beautifulsoup4-4.4.1.dist-info/
 bs4/
+concurrent/
+futures-3.0.4.dist-info/
 nltk/
 nltk_data/
 requests/
 requests-2.9.1.dist-info/
 songs/venv/
+tinys3/
+tinys3-0.1.11.egg-info/
