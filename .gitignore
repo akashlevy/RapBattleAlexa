@@ -64,14 +64,13 @@ target/
 # Zip files
 *.zip
 
-<<<<<<< HEAD
+
 # Private files/temps
 KEYS
 rap
-=======
+
 # Photoshop files
 *.psd
->>>>>>> 9df9fe6e0dc13d96f46fb018dd1ec8ea4118c702
 
 # Dependencies for AWS
 beautifulsoup4-4.4.1.dist-info/
