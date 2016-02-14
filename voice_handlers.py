@@ -65,7 +65,7 @@ def get_rapper_intent_handler(request):
     except KeyError:
         return r.create_response(message="I heard, %s, but I don't know that rapper." % rapper, end_session=False)
 
-    rap = "<speak>Yo my name is {}. ".format(rapper) + intro + " " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'
+    rap = "<speak>Yo my name is {}. ".format(rapper) + intro + " Alexa <break time=\"1.5s\" /> start beatboxing. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'
 
     upload_rap(rap[7:-94])
 
@@ -88,7 +88,7 @@ def call_back_intent_handler(request):
     """
     rap = get_rhyme(chains["toponehundredraps"], 8)
     upload_rap(rap[7:-94])
-    return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. "  + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
+    return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. Alexa <break time=\"1.5s\" /> start beatboxing. "  + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
 
 
 def upload_rap(rap):
