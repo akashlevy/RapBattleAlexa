@@ -2,7 +2,7 @@ from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
 from markov.markov import get_rhyme, get_model
 
 chains = {}
-for file in os.listdir("m"):
+for file in os.listdir("."):
     chains[file] = get_model("models/%s" % file[:-5])
 
 """
