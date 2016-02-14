@@ -76,11 +76,3 @@ def call_back_intent_handler(request):
 
     rap = get_rhyme(chains["toponehundredraps"], 8)
     return r.create_response(message='<speak>Aight yo I\'m gonna rap. Alexa. <break time="1.5s" /> Start rapping. <break time="1.5s" /> drop me a fat beat.' + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /> </speak>')
-=======
-@VoiceHandler(intent="DropBeat")
-def drop_beat_intent_handler(request):
-    """
-    You can insert arbitrary business logic code here
-    """
-    return r.create_response(message="boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and ")
->>>>>>> c5fa93b84a7a1e0ec15229b693454b8ad4310f39
