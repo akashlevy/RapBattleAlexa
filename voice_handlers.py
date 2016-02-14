@@ -65,15 +65,17 @@ def get_rapper_intent_handler(request):
     except KeyError:
         return r.create_response(message="I heard, %s, but I don't know that rapper." % rapper, end_session=False)
 
-    upload_rap(rap)
+    rap = "<speak>Yo my name is {}. ".format(rapper) + intro + " " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'
+
+    upload_rap(rap[7:-94])
 
     # Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
                          subtitle=None,
-                         content=("<speak>Yo my name is {}. ".format(rapper) + intro + " " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'))
+                         content=rap)
 
 
-    return r.create_response(message=("<speak>Yo my name is {}. ".format(rapper) + intro + " " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'),
+    return r.create_response(message=rap,
                              is_ssml=True,
                              end_session=False,
                              card_obj=card)
@@ -84,9 +86,8 @@ def call_back_intent_handler(request):
     """
     You can insert arbitrary business logic code here
     """
-
     rap = get_rhyme(chains["toponehundredraps"], 8)
-    upload_rap(rap)
+    upload_rap(rap[7:-94])
     return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. "  + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
 
 
