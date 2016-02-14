@@ -52,7 +52,10 @@ def get_rapper_intent_handler(request):
     except KeyError:
         intro = ""
 
-    rap = get_rhyme(chains[rapper], 8)
+    try:
+        rap = get_rhyme(chains[rapper], 8)
+    except KeyError:
+        r.create_response(message="I don't know who %s is." + rapper, end_session=True)
 
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
