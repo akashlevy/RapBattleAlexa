@@ -1,8 +1,9 @@
 from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
 from markov.markov import get_rhyme, get_model
+import os
 
 chains = {}
-for file in os.listdir("."):
+for file in os.listdir("models"):
     chains[file] = get_model("models/%s" % file[:-5])
 
 """
@@ -70,7 +71,7 @@ def call_back_intent_handler(request):
     """
     You can insert arbitrary business logic code here
     """
-    rap = get_rhyme(chains["top100raps"], 8)
+    rap = get_rhyme(chains["toponehundredraps"], 8)
     return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
 
 @VoiceHandler(intent="DropBeat")

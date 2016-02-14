@@ -100,7 +100,7 @@ def rhymify(model, lines):
 def get_rhyme(chain, lines):
   return rhymify(chain, lines)
 
-def get_model(markov)
+def get_model(markov):
   with open(markov) as file:
     chain = defaultdict(list)
     chain.update(json.load(file))
