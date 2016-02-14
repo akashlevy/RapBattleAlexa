@@ -95,7 +95,7 @@ def rhymify(model, lines):
   final_rhyme = ''
   for line in fixed:
     final_rhyme += line + ', '
-  return final_rhyme
+  return final_rhyme[:-2]
 
 def get_rhyme(chain, lines):
   return rhymify(chain, lines)
