@@ -59,10 +59,10 @@ def get_rapper_intent_handler(request):
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
                          subtitle=None,
-                         content=("Yo my name is {}. ".format(rapper)) + intro + " Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
+                         content=('<speak>Aight yo I\'m gonna rap. Alexa. <break time="1.5s" /> Start rapping. <break time="1.5s" /> drop me a fat beat.' + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /> </speak>')
 
 
-    return r.create_response(message=("Yo my name is {}. ".format(rapper) + intro + " Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />'),
+    return r.create_response(message=('<speak>Aight yo I\'m gonna rap. Alexa. <break time="1.5s" /> Start rapping. <break time="1.5s" /> drop me a fat beat.' + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /> </speak>'),
                              end_session=False,
                              card_obj=card)
 
@@ -77,11 +77,4 @@ def call_back_intent_handler(request):
         chains[file[:-5]] = get_model("models/%s" % file)
 
     rap = get_rhyme(chains["toponehundredraps"], 8)
-    return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
-
-@VoiceHandler(intent="DropBeat")
-def drop_beat_intent_handler(request):
-    """
-    You can insert arbitrary business logic code here
-    """
-    return r.create_response(message="boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and ")
+    return r.create_response(message='<speak>Aight yo I\'m gonna rap. Alexa. <break time="1.5s" /> Start rapping. <break time="1.5s" /> drop me a fat beat.' + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /> </speak>')
