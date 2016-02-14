@@ -2,10 +2,6 @@ from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
 from markov.markov import get_rhyme, get_model
 import os
 
-chains = {}
-for file in os.listdir("models"):
-    chains[file] = get_model("models/%s" % file[:-5])
-
 """
 In this file we specify default event handlers which are then populated into the handler map using metaprogramming
 Copyright Anjishnu Kumar 2015
@@ -41,6 +37,10 @@ def get_rapper_intent_handler(request):
     You can insert arbitrary business logic code here
     """
 
+    chains = {}
+    for file in os.listdir("models"):
+        chains[file[:-5]] = get_model("models/%s" % file)
+
     # Get variables like userId, slots, intent name etc from the 'Request' object
     rapper = request.get_slot_value("Rapper")
     rapper = rapper if rapper else ""
@@ -71,6 +71,10 @@ def call_back_intent_handler(request):
     """
     You can insert arbitrary business logic code here
     """
+    chains = {}
+    for file in os.listdir("models"):
+        chains[file[:-5]] = get_model("models/%s" % file)
+
     rap = get_rhyme(chains["toponehundredraps"], 8)
     return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
 
