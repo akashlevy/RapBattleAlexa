@@ -31,7 +31,6 @@ def launch_request_handler(request):
 def session_ended_request_handler(request):
     return r.create_response(message="Goodbye!")
 
-<<<<<<< HEAD
 
 @VoiceHandler(intent='StartLike')
 def get_rapper_intent_handler(request):
