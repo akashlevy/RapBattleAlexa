@@ -17,7 +17,7 @@ A response object is defined as the output of ResponseBuilder.create_response()
 
 def default_handler(request):
     """ The default handler gets invoked if no handler is set for a request """
-    return r.create_response(message="Just ask")
+    return r.create_response(message="Rap like who?")
 
 
 @VoiceHandler(request_type="LaunchRequest")
@@ -54,7 +54,10 @@ def get_rapper_intent_handler(request):
     except KeyError:
         intro = ""
 
-    rap = get_rhyme(chains[rapper], 8)
+    try:
+        rap = get_rhyme(chains[rapper], 8)
+    except KeyError:
+        return r.create_response(message="I heard, %s, but I don't know that rapper." % rapper, end_session=True)
 
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
