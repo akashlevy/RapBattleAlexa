@@ -63,3 +63,12 @@ target/
 
 # Zip files
 *.zip
+
+# Dependencies for AWS
+beautifulsoup4-4.4.1.dist-info/
+bs4/
+nltk/
+nltk_data/
+requests/
+requests-2.9.1.dist-info/
+songs/venv/
