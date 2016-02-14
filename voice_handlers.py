@@ -1,4 +1,7 @@
 from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
+from markov.markov import get_rhyme, get_model
+import json
+import os
 
 chains = {}
 for file in os.listdir("models"):
@@ -14,7 +17,7 @@ A response object is defined as the output of ResponseBuilder.create_response()
 
 def default_handler(request):
     """ The default handler gets invoked if no handler is set for a request """
-    return r.create_response(message="Like who?")
+    return r.create_response(message="Just ask")
 
 
 @VoiceHandler(request_type="LaunchRequest")
@@ -51,10 +54,7 @@ def get_rapper_intent_handler(request):
     except KeyError:
         intro = ""
 
-    try:
-        rap = get_rhyme(chains[rapper], 8)
-    except KeyError:
-        r.create_response(message="I don't know who %s is." + rapper, end_session=True)
+    rap = get_rhyme(chains[rapper], 8)
 
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
@@ -75,4 +75,4 @@ def call_back_intent_handler(request):
     """
 
     rap = get_rhyme(chains["toponehundredraps"], 8)
-    return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
+    return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. "  + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
