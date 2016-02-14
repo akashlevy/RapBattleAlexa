@@ -2,6 +2,7 @@
     "intents": [
         {
             "slots": [],
+<<<<<<< HEAD
             "intent": "Start"
         },
         {
@@ -12,6 +13,9 @@
                 }
             ],
             "intent": "StartLike"
+=======
+            "intent": "DropBeat"
+>>>>>>> 209dbd0666b8bc8d9f01108934b73a732f818d8f
         }
     ]
 }

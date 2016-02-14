@@ -1,7 +1,4 @@
 from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
-from markov.markov import get_rhyme, get_model
-import json
-import os
 
 chains = {}
 for file in os.listdir("models"):
@@ -34,6 +31,7 @@ def launch_request_handler(request):
 def session_ended_request_handler(request):
     return r.create_response(message="Goodbye!")
 
+<<<<<<< HEAD
 
 @VoiceHandler(intent='StartLike')
 def get_rapper_intent_handler(request):
@@ -59,11 +57,18 @@ def get_rapper_intent_handler(request):
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
                          subtitle=None,
+<<<<<<< HEAD
                          content=("<speak>Yo my name is {}. ".format(rapper) + intro + " Alexa <break time=\"1.5s\" /> start beatboxing  <break time=\"1.5s\" /> " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'))
 
 
     return r.create_response(message=("<speak>Yo my name is {}. ".format(rapper) + intro + " Alexa <break time=\"1.5s\" /> start beatboxing <break time=\"1.5s\" /> " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'),
                              is_ssml=True,
+=======
+                         content=('<speak>Aight yo I\'m gonna rap. Alexa. <break time="1.5s" /> Start rapping. <break time="1.5s" /> drop me a fat beat.' + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /> </speak>')
+
+
+    return r.create_response(message=('<speak>Aight yo I\'m gonna rap. Alexa. <break time="1.5s" /> Start rapping. <break time="1.5s" /> drop me a fat beat.' + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /> </speak>'),
+>>>>>>> 209dbd0666b8bc8d9f01108934b73a732f818d8f
                              end_session=False,
                              card_obj=card)
 
@@ -75,4 +80,8 @@ def call_back_intent_handler(request):
     """
 
     rap = get_rhyme(chains["toponehundredraps"], 8)
+<<<<<<< HEAD
     return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. Alexa <break time=\"1.5s\" /> start beatboxing <break time=\"1.5s\" /> " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
+=======
+    return r.create_response(message='<speak>Aight yo I\'m gonna rap. Alexa. <break time="1.5s" /> Start rapping. <break time="1.5s" /> drop me a fat beat.' + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /> </speak>')
+>>>>>>> 209dbd0666b8bc8d9f01108934b73a732f818d8f
