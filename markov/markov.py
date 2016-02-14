@@ -94,8 +94,8 @@ def rhymify(model, lines):
 
   final_rhyme = ''
   for line in fixed:
-    final_rhyme += line + '. \n'
-  return final_rhyme.strip()
+    final_rhyme += line + ', '
+  return final_rhyme
 
 def get_rhyme(markov, lines):
   with open(markov) as file:
