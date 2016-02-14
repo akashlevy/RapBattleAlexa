@@ -1,0 +1,58 @@
+StartLike	like {pusha t|Rapper}
+StartLike	like {nas|Rapper}
+StartLike	like {wiz khalifa|Rapper}
+StartLike	like {drake|Rapper}
+StartLike	like {geazy|Rapper}
+StartLike	like {the weeknd|Rapper}
+StartLike	like {camron|Rapper}
+StartLike	like {biz markie|Rapper}
+StartLike	like {50 cent|Rapper}
+StartLike	like {fetty wap|Rapper}
+StartLike	like {jcole|Rapper}
+StartLike	like {ghost face killah|Rapper}
+StartLike	like {jayz|Rapper}
+StartLike	like {jada kiss|Rapper}
+StartLike	like {florida|Rapper}
+StartLike	like {masta ace|Rapper}
+StartLike	like {t i|Rapper}
+StartLike	like {ll cool j|Rapper}
+StartLike	like {snoop dogg|Rapper}
+StartLike	like {adele|Rapper}
+StartLike	like {az|Rapper}
+StartLike	like {big daddy kane|Rapper}
+StartLike	like {canibus|Rapper}
+StartLike	like {redman|Rapper}
+StartLike	like {selena gomez|Rapper}
+StartLike	like {pharoah emonch|Rapper}
+StartLike	like {big l|Rapper}
+StartLike	like {prodigy|Rapper}
+StartLike	like {sia|Rapper}
+StartLike	like {future|Rapper}
+StartLike	like {kevin gates|Rapper}
+StartLike	like {mosdef|Rapper}
+StartLike	like {intros|Rapper}
+StartLike	like {qtip|Rapper}
+StartLike	like {nicki minaj|Rapper}
+StartLike	like {ice cube|Rapper}
+StartLike	like {chris brown|Rapper}
+StartLike	like {talib kweli|Rapper}
+StartLike	like {slick rick|Rapper}
+StartLike	like {twenty one pilots|Rapper}
+StartLike	like {lauryn hill|Rapper}
+StartLike	like {taylor swift|Rapper}
+StartLike	like {lil wayne|Rapper}
+StartLike	like {2pac|Rapper}
+StartLike	like {the notorious big|Rapper}
+StartLike	like {eminem|Rapper}
+StartLike	like {dmx|Rapper}
+StartLike	like {method man|Rapper}
+StartLike	like {top100raps|Rapper}
+StartLike	like {busta rhymes|Rapper}
+StartLike	like {rakim|Rapper}
+StartLike	like {big pun|Rapper}
+StartLike	like {tech nine|Rapper}
+StartLike	like {rihanna|Rapper}
+StartLike	like {justin bieber|Rapper}
+StartLike	like {common|Rapper}
+StartLike	like {royce da 5 9|Rapper}
+StartLike	like {kanye west|Rapper}
