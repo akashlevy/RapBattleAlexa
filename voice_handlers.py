@@ -50,10 +50,10 @@ def get_rapper_intent_handler(request):
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
                          subtitle=None,
-                         content=("Yo my name is {}. ".format(rapper)) + intro + " Alexa, drop me a fat beat. " + rap)
+                         content=("Yo my name is {}. ".format(rapper)) + intro + " Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
 
 
-    return r.create_response(message=("Yo my name is {}. ".format(rapper) + intro + " Alexa, drop me a fat beat. " + rap),
+    return r.create_response(message=("Yo my name is {}. ".format(rapper) + intro + " Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />'),
                              end_session=False,
                              card_obj=card)
 
@@ -65,7 +65,7 @@ def call_back_intent_handler(request):
     """
     rap = get_rhyme("models/top100raps.json", 8)
     # rap = "hi"
-    return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap)
+    return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
 
 @VoiceHandler(intent="DropBeat")
 def drop_beat_intent_handler(request):
