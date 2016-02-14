@@ -9,8 +9,8 @@ for file in os.listdir("models"):
     chains[file[:-5]] = get_model("models/%s" % file)
 
 with open("KEYS") as keyfile:
-    S3_ACCESS_KEY = f.readline().strip()
-    S3_SECRET_KEY = f.readline().strip()
+    S3_ACCESS_KEY = keyfile.readline().strip()
+    S3_SECRET_KEY = keyfile.readline().strip()
     conn = tinys3.Connection(S3_ACCESS_KEY, S3_SECRET_KEY, tls=True)
 
 """
