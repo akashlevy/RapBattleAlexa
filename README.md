@@ -15,9 +15,3 @@ Alexa can spit bars now. Check it out! Developed at TreeHacks 2016!
 - [cmudict](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
 - [nltk](http://www.nltk.org/)
 - [requests](http://docs.python-requests.org/en/master/)
-
-## Todos:
-- Record user, include in Markov -> Literals for audio retrieval
-- Rhythm
-- Combine
-- Get working on Alexa

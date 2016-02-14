@@ -12,10 +12,6 @@
                 }
             ],
             "intent": "StartLike"
-        },
-        {
-            "slots": [],
-            "intent": "DropBeat"
         }
     ]
 }

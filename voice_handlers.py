@@ -3,6 +3,10 @@ from markov.markov import get_rhyme, get_model
 import json
 import os
 
+chains = {}
+for file in os.listdir("models"):
+    chains[file[:-5]] = get_model("models/%s" % file)
+
 """
 In this file we specify default event handlers which are then populated into the handler map using metaprogramming
 Copyright Anjishnu Kumar 2015
@@ -38,10 +42,6 @@ def get_rapper_intent_handler(request):
     You can insert arbitrary business logic code here
     """
 
-    chains = {}
-    for file in os.listdir("models"):
-        chains[file[:-5]] = get_model("models/%s" % file)
-
     # Get variables like userId, slots, intent name etc from the 'Request' object
     rapper = request.get_slot_value("Rapper")
     rapper = rapper if rapper else ""
@@ -59,10 +59,11 @@ def get_rapper_intent_handler(request):
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
                          subtitle=None,
-                         content=("Yo my name is {}. ".format(rapper)) + intro + " Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
+                         content=("<speak>Yo my name is {}. ".format(rapper) + intro + " Alexa <break time=\"1.5s\" /> start beatboxing  <break time=\"1.5s\" /> " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'))
 
 
-    return r.create_response(message=("Yo my name is {}. ".format(rapper) + intro + " Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />'),
+    return r.create_response(message=("<speak>Yo my name is {}. ".format(rapper) + intro + " Alexa <break time=\"1.5s\" /> start beatboxing <break time=\"1.5s\" /> " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>'),
+                             is_ssml=True,
                              end_session=False,
                              card_obj=card)
 
@@ -72,16 +73,6 @@ def call_back_intent_handler(request):
     """
     You can insert arbitrary business logic code here
     """
-    chains = {}
-    for file in os.listdir("models"):
-        chains[file[:-5]] = get_model("models/%s" % file)
 
     rap = get_rhyme(chains["toponehundredraps"], 8)
-    return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" />')
-
-@VoiceHandler(intent="DropBeat")
-def drop_beat_intent_handler(request):
-    """
-    You can insert arbitrary business logic code here
-    """
-    return r.create_response(message="boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and ")
+    return r.create_response(is_ssml=True, message="<speak>Aight yo I'm gonna rap. Alexa <break time=\"1.5s\" /> start beatboxing <break time=\"1.5s\" /> " + rap + '<audio src="https://s3.amazonaws.com/danielgwilson.com/MLG+Horns+Sound+Effect.mp3" /></speak>')
