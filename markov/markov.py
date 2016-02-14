@@ -98,7 +98,7 @@ def rhymify(model, lines):
   return final_rhyme[:-2]
 
 def get_rhyme(chain, lines):
-  return rhymify(chain, lines)
+  return rhymify(chain, lines).replace("?", "'").replace("imma", "ima")
 
 def get_model(markov):
   with open(markov) as file:
