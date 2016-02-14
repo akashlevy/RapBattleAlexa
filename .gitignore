@@ -64,6 +64,9 @@ target/
 # Zip files
 *.zip
 
+# Photoshop files
+*.psd
+
 # Dependencies for AWS
 beautifulsoup4-4.4.1.dist-info/
 bs4/
