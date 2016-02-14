@@ -14,7 +14,7 @@ A response object is defined as the output of ResponseBuilder.create_response()
 
 def default_handler(request):
     """ The default handler gets invoked if no handler is set for a request """
-    return r.create_response(message="Just ask")
+    return r.create_response(message="Like who?")
 
 
 @VoiceHandler(request_type="LaunchRequest")
