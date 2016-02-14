@@ -4,7 +4,7 @@
 
 Alexa can spit bars now. Check it out! Developed at TreeHacks 2016!
 
-![Rappers](http://ppcorn.com/us/wp-content/uploads/sites/14/2015/04/The-Top-10-Greatest-Rappers-of-All-Time-PPCORN.jpg "Rappers")
+![Rappers](https://github.com/akashlevy/RapBattleAlexa/blob/master/RapBattleAlexa.jpg "Rappers")
 
 ## Credits
 - [ask-alexa-pykit](https://github.com/anjishnu/ask-alexa-pykit)
