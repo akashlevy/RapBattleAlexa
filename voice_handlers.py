@@ -1,4 +1,5 @@
 from alexa.ask.utils import VoiceHandler, ResponseBuilder as r
+from markov.markov import get_rhyme
 
 """
 In this file we specify default event handlers which are then populated into the handler map using metaprogramming
@@ -43,13 +44,16 @@ def get_rapper_intent_handler(request):
 
     intro = intros[rapper] if intros[rapper] else ""
 
+    rap = get_rhyme("models/top100raps.json", 8)
+    # rap = "hi"
+
     #Use ResponseBuilder object to build responses and UI cards
     card = r.create_card(title="Rapping",
                          subtitle=None,
-                         content=("Yo my name is {}. ".format(rapper)) + intro + " Alexa, drop me a fat beat.")
+                         content=("Yo my name is {}. ".format(rapper)) + intro + " Alexa, drop me a fat beat. " + rap)
 
 
-    return r.create_response(message=("Yo my name is {}. ".format(rapper) + intro + " Alexa, drop me a fat beat."),
+    return r.create_response(message=("Yo my name is {}. ".format(rapper) + intro + " Alexa, drop me a fat beat. " + rap),
                              end_session=False,
                              card_obj=card)
 
@@ -59,7 +63,9 @@ def call_back_intent_handler(request):
     """
     You can insert arbitrary business logic code here
     """
-    return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat.")
+    rap = get_rhyme("models/top100raps.json", 8)
+    # rap = "hi"
+    return r.create_response(message="Aight yo I'm gonna rap. Alexa, drop me a fat beat. " + rap)
 
 @VoiceHandler(intent="DropBeat")
 def drop_beat_intent_handler(request):
